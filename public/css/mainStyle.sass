@@ -5,19 +5,30 @@ body
   font-family: 'Lato', sans-serif
   background: #77bbe0
 
+.heroText
+  margin: 8em 0 4em 0
+  color: white
+  text-align: center
+
 .shortener
   display: block
   width: $width
   margin: 0 auto
 
 .inputForm
+  position: relative
   display: block
-  input
+  margin-bottom: 20px
+  .inputFld
+    width: $width - 2%
     border: 0
     border-top-left-radius: 3px
     border-bottom-left-radius: 3px
     padding: 1em 1.2em
   .submitBtn
+    position: absolute
+    right: 0
+    top: 0
     border: 0
     border-top-right-radius: 3px
     border-bottom-right-radius: 3px
@@ -26,5 +37,12 @@ body
     padding: 1em 1.2em
 
 .outputUrl
+  margin-bottom: 4px
+  padding: 1em 1.2em
+  border-radius: 3px
   background-color: white
   a
+    text-decoration: none
+    color: #ee6123
+  p
+    margin: 4px

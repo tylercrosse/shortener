@@ -3,19 +3,30 @@ body {
   font-family: 'Lato', sans-serif;
   background: #77bbe0; }
 
+.heroText {
+  margin: 8em 0 4em 0;
+  color: white;
+  text-align: center; }
+
 .shortener {
   display: block;
   width: 94%;
   margin: 0 auto; }
 
 .inputForm {
-  display: block; }
-  .inputForm input {
+  position: relative;
+  display: block;
+  margin-bottom: 20px; }
+  .inputForm .inputFld {
+    width: 92%;
     border: 0;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     padding: 1em 1.2em; }
   .inputForm .submitBtn {
+    position: absolute;
+    right: 0;
+    top: 0;
     border: 0;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -24,4 +35,12 @@ body {
     padding: 1em 1.2em; }
 
 .outputUrl {
+  margin-bottom: 4px;
+  padding: 1em 1.2em;
+  border-radius: 3px;
   background-color: white; }
+  .outputUrl a {
+    text-decoration: none;
+    color: #ee6123; }
+  .outputUrl p {
+    margin: 4px; }

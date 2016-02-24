@@ -67,6 +67,7 @@ var InputBox = React.createClass({
     return (
       <form className="inputForm" onSubmit={this.handleSubmit}>
         <input
+          className="inputFld"
           type="text"
           placeholder="Put in long link"
           value={this.state.originalUrl}
