@@ -24,21 +24,40 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/hz-chal');
 var Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
-var aaaaSchema = mongoose.Schema({
-
+var UrlSchema = mongoose.Schema({
+  shortUrl: String,
+  orignalUrl: String,
+  clickCount: Number,
+  created_at: Date
 });
 
-var aaaa = mongoose.model('aaaa', aaaaSchema);
+var Url = mongoose.model('Url', UrlSchema);
 
 //**** Routes ****//
 // also typically borken into separate files with contorllers
+var router = express.Router();
 
-app.get('/', function(req, res) {
-  res.send('Hello World!');
-});
+router.route('/')
+  .get(function(req, res) {
+    res.send('Hello World!');
+  });
+
+router.route('/api/url')
+  .get(function(req,res) {
+    Url.find({}).then(function(results) {
+      res.json(results);
+    });
+  })
+  .post(function(req,res) {
+    var newUrl = new Url({});
+    newUrl.save(function(err, doc) {
+      if (!err) {
+        res.json({code: doc.code})
+      }
+    });
+  });
 
 // randomstring.generate(7);
-
 
 //*** Express simple HTTP server ****//
 app.set('port', (process.env.PORT || 3000));
