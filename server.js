@@ -3,6 +3,7 @@ var path = require('path');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var randomstring = require('randomstring');
 
 //*** Middleware ***//
 app.use('/', express.static(path.join(__dirname, 'public')));
@@ -35,6 +36,9 @@ var aaaa = mongoose.model('aaaa', aaaaSchema);
 app.get('/', function(req, res) {
   res.send('Hello World!');
 });
+
+// randomstring.generate(7);
+
 
 //*** Express simple HTTP server ****//
 app.set('port', (process.env.PORT || 3000));
