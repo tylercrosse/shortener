@@ -28,7 +28,7 @@ var UrlSchema = mongoose.Schema({
   shortUrl: String,
   orignalUrl: String,
   clickCount: Number,
-  created_at: Date
+  createdAt: Date
 });
 
 var Url = mongoose.model('Url', UrlSchema);
@@ -42,14 +42,19 @@ router.route('/')
     res.send('Hello World!');
   });
 
-router.route('/api/url')
+router.route('/api/links')
   .get(function(req,res) {
     Url.find({}).then(function(results) {
       res.json(results);
     });
   })
   .post(function(req,res) {
-    var newUrl = new Url({});
+    var newUrl = new Url({
+      shortUrl: randomstring.generate(7),
+      orignalUrl: req.body.orginalUrl,
+      clickCount: 0,
+      createdAt: new Date()
+    });
     newUrl.save(function(err, doc) {
       if (!err) {
         res.json({code: doc.code})
@@ -57,7 +62,7 @@ router.route('/api/url')
     });
   });
 
-// randomstring.generate(7);
+app.use(router); // router middleware
 
 //*** Express simple HTTP server ****//
 app.set('port', (process.env.PORT || 3000));

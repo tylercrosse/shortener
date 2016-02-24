@@ -51,11 +51,31 @@ var Shortener = React.createClass({
 });
 
 var InputBox = React.createClass({
+  getInitialState: function() {
+    return {orginalUrl: ''};
+  },
+  handleInputChange: function(e) {
+    this.setState({originalUrl: e.target.value});
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var orginalUrl = this.state.orginalUrl.trim();
+    if (!originalUrl) {
+      return
+    }
+    this.props.onInputSubmit({orginalUrl: orginalUrl});
+    this.setState({originalUrl: ''});
+  },
   render: function() {
     return (
-      <div className="urlForm">
-        Hello, world! I am an urlForm!
-      </div>
+      <form clasName="commentForm" onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          placeholder="Put in your long link"
+          onChange={this.handleAuthorChange}
+        />
+        <input type="submit" value="Shorten" />
+      </form>
     )
   }
 });
