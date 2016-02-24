@@ -62,6 +62,17 @@ router.route('/api/links')
     });
   });
 
+router.route('/:id')
+  .get(function(req,res) {
+    Url.findOne({shortUrl: req.params.id}, function(err, doc) {
+      if (!err && doc) {
+        // redirect to orignal url
+      } else {
+        // send error, redirect home
+      }
+    })
+  });
+
 app.use(router); // router middleware
 
 //*** Express simple HTTP server ****//
