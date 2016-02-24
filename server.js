@@ -1,0 +1,43 @@
+var fs = require('fs');
+var path = require('path');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+
+//*** Middleware ***//
+app.use('/', express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(function(req,res,next) {
+  res.setHeader('Access-Control-Allow-Origin', '*'); // allow CORS
+  res.setHeader('Cache-control', 'no-cache'); // disable caching
+  next();
+});
+
+//*** DB ***//
+// typically separate files, kept here for readbility in code challenge
+var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/hz-chal');
+
+var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
+
+var aaaaSchema = mongoose.Schema({
+
+});
+
+var aaaa = mongoose.model('aaaa', aaaaSchema);
+
+//**** Routes ****//
+// also typically borken into separate files with contorllers
+
+app.get('/', function(req, res) {
+  res.send('Hello World!');
+});
+
+//*** Express simple HTTP server ****//
+app.set('port', (process.env.PORT || 3000));
+app.listen(app.get('port'), function () {
+  console.log('Server started: 127.0.0.1:' + app.get('port')+ '/');
+});
