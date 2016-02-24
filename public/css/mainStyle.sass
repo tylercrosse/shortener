@@ -1,7 +1,13 @@
+$mqMobileS: 320px
+$mqMobileM: 375px
+$mqMobileL: 425px
+$mqTablet: 768px
+$mqDesktop: 1024px
 $width: 94%
 
 body
   box-sizing: border-box
+  font-size: 0.8em
   font-family: 'Lato', sans-serif
   background: #77bbe0
 
@@ -19,11 +25,11 @@ body
   position: relative
   display: block
   margin-bottom: 20px
+  overflow: hidden
   .inputFld
     width: $width - 2%
     border: 0
-    border-top-left-radius: 3px
-    border-bottom-left-radius: 3px
+    border-radius: 3px
     padding: 1em 1.2em
   .submitBtn
     position: absolute
@@ -46,3 +52,13 @@ body
     color: #ee6123
   p
     margin: 4px
+
+@media screen and (min-width: $mqTablet)
+  body
+    font-size: 1em
+
+  .heroText
+    font-size: 1.4em
+
+  .shortener
+    width: 720px
