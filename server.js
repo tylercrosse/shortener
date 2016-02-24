@@ -67,9 +67,12 @@ router.route('/:id')
   .get(function(req,res) {
     Url.findOne({shortUrl: req.params.id}, function(err, doc) {
       if (!err && doc) {
-        res.redirect(doc.originalUrl);
+        doc.visitCount ++
+        doc.save(function(err) {
+          if (!err) {res.redirect(doc.originalUrl);}
+        });
       } else {
-        console.log(err);
+        res.send(err);
       }
     })
   });
