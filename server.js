@@ -67,9 +67,9 @@ router.route('/:id')
   .get(function(req,res) {
     Url.findOne({shortUrl: req.params.id}, function(err, doc) {
       if (!err && doc) {
-        // redirect to orignal url
+        res.redirect(doc.originalUrl);
       } else {
-        // send error, redirect home
+        console.log(err);
       }
     })
   });
