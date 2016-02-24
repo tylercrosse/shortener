@@ -40,7 +40,6 @@ var Shortener = React.createClass({
   render: function() {
      return (
        <div className="shortener">
-         <h1>Hello, world! I am a shortener!</h1>
          <InputBox onInputSubmit={this.handleUrlSubmit} />
          <OutputList data={this.state.data}/>
        </div>
@@ -66,14 +65,14 @@ var InputBox = React.createClass({
   },
   render: function() {
     return (
-      <form clasName="commentForm" onSubmit={this.handleSubmit}>
+      <form className="inputForm" onSubmit={this.handleSubmit}>
         <input
           type="text"
           placeholder="Put in long link"
           value={this.state.originalUrl}
           onChange={this.handleInputChange}
         />
-        <input type="submit" value="Shorten" />
+        <input className="submitBtn" type="submit" value="Shorten" />
       </form>
     )
   }
@@ -83,7 +82,7 @@ var OutputList = React.createClass({
   render: function() {
     var outputNodes = this.props.data.map(function(url) {
       return (
-        <OutputUrl key={url._id} originalUrl={url.originalUrl} shortUrl={url.shortUrl}>
+        <OutputUrl key={url._id} originalUrl={url.originalUrl} shortUrl={url.shortUrl} visitCount={url.visitCount} createdAt={url.createdAt}>
         </OutputUrl>
       )
     })
@@ -101,7 +100,9 @@ var OutputUrl = React.createClass({
     return (
       <div className="outputUrl">
         <p clasName="originalUrl">{this.props.originalUrl}</p>
-        <p clasName="shortUrl">127.0.0.1:3000/{this.props.shortUrl}</p>
+        <a clasName="shortUrl" href={this.props.shortUrl} target="_blank">127.0.0.1:3000/{this.props.shortUrl}</a>
+        <p className="visitCount">Visits: {this.props.visitCount}</p>
+        <p className="createdAt">Created at: {this.props.createdAt}</p>
       </div>
     )
   }
