@@ -26,7 +26,7 @@ var Schema = mongoose.Schema,
 
 var UrlSchema = mongoose.Schema({
   shortUrl: String,
-  orignalUrl: String,
+  originalUrl: String,
   visitCount: Number,
   createdAt: Date
 });
@@ -52,7 +52,7 @@ router.route('/api/links')
   .post(function(req,res) {
     var newUrl = new Url({
       shortUrl: randomstring.generate(7),
-      orignalUrl: req.body.originalUrl,
+      originalUrl: req.body.originalUrl,
       visitCount: 0,
       createdAt: new Date()
     });

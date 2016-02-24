@@ -7,6 +7,7 @@ var Shortener = React.createClass({
       dataType: 'json',
       cache: false,
       success: (data) => {
+        console.log(data);
         this.setState({data: data});
       },
       error: (xhr, status, err) => {
@@ -82,7 +83,7 @@ var OutputList = React.createClass({
   render: function() {
     var outputNodes = this.props.data.map(function(url) {
       return (
-        <OutputUrl originalUrl={'SOMETHING SUPER DUPER LONGGGGGGGGGGGG'} shortUrl={'some short'}>
+        <OutputUrl key={url._id} originalUrl={url.originalUrl} shortUrl={url.shortUrl}>
         </OutputUrl>
       )
     })
@@ -93,7 +94,6 @@ var OutputList = React.createClass({
       </div>
     )
   }
-
 });
 
 var OutputUrl = React.createClass({
@@ -101,11 +101,10 @@ var OutputUrl = React.createClass({
     return (
       <div className="outputUrl">
         <p clasName="originalUrl">{this.props.originalUrl}</p>
-        <p clasName="shortUrl">{this.props.shortUrl}</p>
+        <p clasName="shortUrl">127.0.0.1:3000/{this.props.shortUrl}</p>
       </div>
     )
   }
-
 });
 
 ReactDOM.render(
