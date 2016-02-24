@@ -3,23 +3,20 @@
 var Shortener = React.createClass({
   loadUrlsFromServer: function() {
     $.ajax({
-      url: '/api/url',
+      url: '/api/links',
       dataType: 'json',
       cache: false,
       success: (data) => {
         this.setState({data: data});
       },
       error: (xhr, status, err) => {
-        console.error('/api/url', status, err.toString());
+        console.error('/api/links', status, err.toString());
       }
     });
   },
   handleUrlSubmit: function(url) {
-    var urls = this.state.data;
-    // TODO pull in params
-    //set state to reflect new comments
     $.ajax({
-      url: '/api/url/',
+      url: '/api/links',
       dataType: 'json',
       type: 'POST',
       data: url,
@@ -43,7 +40,7 @@ var Shortener = React.createClass({
      return (
        <div className="shortener">
          <h1>Hello, world! I am a shortener!</h1>
-         <InputBox />
+         <InputBox onInputSubmit={this.handleUrlSubmit} />
          <OutputList data={this.state.data}/>
        </div>
      );
@@ -52,18 +49,18 @@ var Shortener = React.createClass({
 
 var InputBox = React.createClass({
   getInitialState: function() {
-    return {orginalUrl: ''};
+    return {originalUrl: ''};
   },
   handleInputChange: function(e) {
     this.setState({originalUrl: e.target.value});
   },
   handleSubmit: function(e) {
     e.preventDefault();
-    var orginalUrl = this.state.orginalUrl.trim();
+    var originalUrl = this.state.originalUrl.trim();
     if (!originalUrl) {
       return
     }
-    this.props.onInputSubmit({orginalUrl: orginalUrl});
+    this.props.onInputSubmit({originalUrl: originalUrl});
     this.setState({originalUrl: ''});
   },
   render: function() {
@@ -71,8 +68,9 @@ var InputBox = React.createClass({
       <form clasName="commentForm" onSubmit={this.handleSubmit}>
         <input
           type="text"
-          placeholder="Put in your long link"
-          onChange={this.handleAuthorChange}
+          placeholder="Put in long link"
+          value={this.state.originalUrl}
+          onChange={this.handleInputChange}
         />
         <input type="submit" value="Shorten" />
       </form>
@@ -102,7 +100,7 @@ var OutputUrl = React.createClass({
   render: function() {
     return (
       <div className="outputUrl">
-        <p clasName="orginalUrl">{this.props.orginalUrl}</p>
+        <p clasName="originalUrl">{this.props.originalUrl}</p>
         <p clasName="shortUrl">{this.props.shortUrl}</p>
       </div>
     )

@@ -27,7 +27,7 @@ var Schema = mongoose.Schema,
 var UrlSchema = mongoose.Schema({
   shortUrl: String,
   orignalUrl: String,
-  clickCount: Number,
+  visitCount: Number,
   createdAt: Date
 });
 
@@ -45,14 +45,15 @@ router.route('/')
 router.route('/api/links')
   .get(function(req,res) {
     Url.find({}).then(function(results) {
+      // console.log(results);
       res.json(results);
     });
   })
   .post(function(req,res) {
     var newUrl = new Url({
       shortUrl: randomstring.generate(7),
-      orignalUrl: req.body.orginalUrl,
-      clickCount: 0,
+      orignalUrl: req.body.originalUrl,
+      visitCount: 0,
       createdAt: new Date()
     });
     newUrl.save(function(err, doc) {
