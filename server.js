@@ -81,5 +81,5 @@ app.use(router); // router middleware
 //*** Express simple HTTP server ****//
 app.set('port', (process.env.PORT || 3000));
 app.listen(app.get('port'), function () {
-  console.log('Server started: 127.0.0.1:' + app.get('port')+ '/');
+  console.log('Server started: 104.131.109.177:' + app.get('port')+ '/');
 });

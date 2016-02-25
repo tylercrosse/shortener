@@ -103,7 +103,7 @@ var OutputUrl = React.createClass({
         <p className="createdAt">Created  {this.props.createdAt}</p>
         <p className="visitCount">Visits: {this.props.visitCount}</p>
         <p className="originalUrl">{this.props.originalUrl}</p>
-        <a clasName="shortUrl" href={this.props.shortUrl} target="_blank">127.0.0.1:3000/{this.props.shortUrl}</a>
+        <a clasName="shortUrl" href={this.props.shortUrl} target="_blank">104.131.109.177:3000/{this.props.shortUrl}</a>
       </div>
     )
   }
