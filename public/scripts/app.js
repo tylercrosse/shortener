@@ -7,7 +7,6 @@ var Shortener = React.createClass({
       dataType: 'json',
       cache: false,
       success: (data) => {
-        console.log(data);
         this.setState({data: data});
       },
       error: (xhr, status, err) => {
@@ -82,8 +81,9 @@ var InputBox = React.createClass({
 var OutputList = React.createClass({
   render: function() {
     var outputNodes = this.props.data.map(function(url) {
+      var dWords = moment(url.createdAt).fromNow();
       return (
-        <OutputUrl key={url._id} originalUrl={url.originalUrl} shortUrl={url.shortUrl} visitCount={url.visitCount} createdAt={url.createdAt}>
+        <OutputUrl key={url._id} originalUrl={url.originalUrl} shortUrl={url.shortUrl} visitCount={url.visitCount} createdAt={dWords}>
         </OutputUrl>
       )
     })
@@ -100,10 +100,10 @@ var OutputUrl = React.createClass({
   render: function() {
     return (
       <div className="outputUrl">
-        <p clasName="originalUrl">{this.props.originalUrl}</p>
-        <a clasName="shortUrl" href={this.props.shortUrl} target="_blank">127.0.0.1:3000/{this.props.shortUrl}</a>
+        <p className="createdAt">Created  {this.props.createdAt}</p>
         <p className="visitCount">Visits: {this.props.visitCount}</p>
-        <p className="createdAt">Created at: {this.props.createdAt}</p>
+        <p className="originalUrl">{this.props.originalUrl}</p>
+        <a clasName="shortUrl" href={this.props.shortUrl} target="_blank">127.0.0.1:3000/{this.props.shortUrl}</a>
       </div>
     )
   }

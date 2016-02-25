@@ -45,6 +45,11 @@ body {
     color: #ee6123; }
   .outputUrl p {
     margin: 4px; }
+  .outputUrl .createdAt {
+    float: right; }
+  .outputUrl .originalUrl {
+    overflow: hidden;
+    color: #999999; }
 
 @media screen and (min-width: 768px) {
   body {
