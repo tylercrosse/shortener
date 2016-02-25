@@ -34,7 +34,7 @@ var UrlSchema = mongoose.Schema({
 var Url = mongoose.model('Url', UrlSchema);
 
 //**** Routes ****//
-// also typically borken into separate files with contorllers
+// also typically borken into separate files with contorollers
 var router = express.Router();
 
 router.route('/')
@@ -45,7 +45,6 @@ router.route('/')
 router.route('/api/links')
   .get(function(req,res) {
     Url.find({}).then(function(results) {
-      // console.log(results);
       res.json(results);
     });
   })
